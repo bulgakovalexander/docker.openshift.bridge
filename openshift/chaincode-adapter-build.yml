@@ -1,0 +1,15 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: hyperledger.fabric.openshift.bridge
+#  namespace: myproject
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: hyperledger.fabric.openshift.bridge:latest
+  runPolicy: Serial
+  source:
+    type: Binary
+  strategy:
+    type: Docker

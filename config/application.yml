@@ -1,0 +1,86 @@
+server:
+  port: 3256
+
+logging:
+  level:
+    root: trace
+    javax:
+      management: info
+    java:
+      io:
+        serialization: info
+    sun:
+      rmi: info
+    org:
+      springframework:
+        boot:
+          context:
+            config:
+              ConfigFileApplicationListener: info
+          autoconfigure:
+            condition:
+              OnPropertyCondition: info
+              OnBeanCondition: info
+              OnClassCondition: info
+        context:
+          annotation:
+            ConfigurationClassEnhancer: info
+            ConfigurationClassPostProcessor: info
+            ConfigurationClassBeanDefinitionReader: info
+            ClassPathBeanDefinitionScanner: info
+          event:
+            EventListenerMethodProcessor: info
+        beans:
+          factory:
+            support:
+              DefaultListableBeanFactory: info
+        core:
+          env:
+            PropertySourcesPropertyResolver: info
+        web:
+          servlet:
+            DispatcherServlet: true
+            mvc:
+              method:
+                annotation:
+                  RequestMappingHandlerMapping: true
+          reactive:
+            result:
+              method:
+                annotation:
+                  RequestMappingHandlerMapping: trace
+          server:
+            adapter: trace
+      apache:
+        tomcat:
+          websocket: trace
+          util:
+            modeler:
+              Registry: info
+              modules:
+                Registry: info
+                MbeansDescriptorsIntrospectionSource: info
+            IntrospectionUtils: info
+            digester:
+              Digester: info
+            net:
+              NioEndpoint: debug
+              SocketWrapperBase: info
+  path: logs
+service.type: openshift
+
+kubernetes:
+  master-url: https://kubernetes.docker.internal:6443
+  auth.token: eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJ0dGwtY29udHJvbGxlci10b2tlbi1icWRycCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJ0dGwtY29udHJvbGxlciIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjI4YWU2MTg3LWRhMDctMTFlOS1hMjRkLTAyNTAwMDAwMDAwMSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTp0dGwtY29udHJvbGxlciJ9.Dj77l4Vm9V63sHdMdz0EV9pCF5ZkTzCNKhZnPEnC9A0Kw6P7w8Govw1444rzjQdmPVZlchvBrtvX6BtiF80Ne0bRVz35A7juKKrQPsnlw9JLzDzNPn3VF5-9gofLgDaooMyp4nBnfQpGK-NLC6rB6Lh1ciqO2-u0D1mUscXRy4-J813uKKFmSh4nxqjY-PEc2iV38xBdozJb-8t2iAhAw6K-bdTm5vAAta8zgSep9atb3YMRolgdl5DkpbkcU8cZD6oj44xoFUSMTX3sXbPN3sO3TQWAaIB_vU48IbxGVt0iO5sFxk6sWt9BOnEk5iBjDyG4nUSldp343RyGIToqNQ
+  local-docker.registry: MacBook-Pro-Alexander.local:5000
+docker:
+  docker-url: http://localhost:2376
+openshift:
+  master-url: https://192.168.99.100:8443
+  namespace: myproject
+  auth:
+#    user-name: developer
+#    password: developer
+    token: eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJteXByb2plY3QiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiaHlwZXItdG9rZW4teGd0eGQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiaHlwZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI3ZTBhYWFjYi1lOWRhLTExZTktODI3My0wODAwMjdmZWI5MDIiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6bXlwcm9qZWN0Omh5cGVyIn0.SxA5ujto8OdpPrQbsCDINJAMZzdLrPyJWgnjlqD07L36HsPqqvcEs8X-ZDl7lD0T9IqzKAxDWi9-orUXvVc84yb3NG4IdZb4lDI3kHlGPMjyVXTZ35jmPfZ7xr_vmBh7VUH4bQ08O2w317Vw4q2qwtvFwripkEbkGQmisWvf5a-8d1kJbHvp3Uq4PdnuiNClWsTUy2OSq3xUHtZNQm3SV0rWIt3uD2tQSeENiv4_XdoDlX0izcfFxa4Fp1kW0jrQVysfDBqBt-Q_eSwNKwDMrYnllouGolgQqh8z1Wj0ab_GO13cx4tVSoTgvw3MyDXf4IhzDRFoRYqPO4MucxuLnA
+  disable-deleting: false
+

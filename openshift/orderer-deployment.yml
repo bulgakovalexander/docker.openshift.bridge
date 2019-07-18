@@ -1,0 +1,34 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: peer
+  name: peer
+spec:
+  selector:
+    app: peer
+    deploymentconfig: peer
+  template:
+    metadata:
+      labels:
+        app: peer
+        deploymentconfig: peer
+    spec:
+      containers:
+        - env:
+            - name: CORE_VM_ENDPOINT
+              value: "http://chaincode-adapter-myproject.192.168.99.100.nip.io/"
+            - name: CORE_PEER_ID
+              value: peer
+            - name: CORE_PEER_LOCALMSPID
+              value: peermsp
+          image: hyperledger/fabric-peer:1.4.3
+          imagePullPolicy: Always
+          name: peer
+          ports:
+            - containerPort: 7052
+              protocol: TCP
+            - containerPort: 7051
+              protocol: TCP
+      restartPolicy: Always
+

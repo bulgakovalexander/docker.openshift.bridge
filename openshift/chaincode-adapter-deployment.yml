@@ -1,0 +1,43 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: chaincode-adapter
+  name: chaincode-adapter
+spec:
+  selector:
+    app: chaincode-adapter
+    deploymentconfig: chaincode-adapter
+  template:
+    metadata:
+      labels:
+        app: chaincode-adapter
+        deploymentconfig: chaincode-adapter
+    spec:
+      containers:
+        - env:
+            - name: OPENSHIFT_MASTER_URL
+              value: 'https://192.168.99.100:8443'
+            - name: OPENSHIFT_AUTH_TOKEN
+              value: >-
+                eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJteXByb2plY3QiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiaHlwZXItdG9rZW4teGd0eGQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiaHlwZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI3ZTBhYWFjYi1lOWRhLTExZTktODI3My0wODAwMjdmZWI5MDIiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6bXlwcm9qZWN0Omh5cGVyIn0.SxA5ujto8OdpPrQbsCDINJAMZzdLrPyJWgnjlqD07L36HsPqqvcEs8X-ZDl7lD0T9IqzKAxDWi9-orUXvVc84yb3NG4IdZb4lDI3kHlGPMjyVXTZ35jmPfZ7xr_vmBh7VUH4bQ08O2w317Vw4q2qwtvFwripkEbkGQmisWvf5a-8d1kJbHvp3Uq4PdnuiNClWsTUy2OSq3xUHtZNQm3SV0rWIt3uD2tQSeENiv4_XdoDlX0izcfFxa4Fp1kW0jrQVysfDBqBt-Q_eSwNKwDMrYnllouGolgQqh8z1Wj0ab_GO13cx4tVSoTgvw3MyDXf4IhzDRFoRYqPO4MucxuLnA
+          image: >-
+            172.30.1.1:5000/myproject/hyperledger.fabric.openshift.bridge@sha256:c66c7809d532922dc487a261c3de73ab6f9bfb9db1dda4bf34ae87d9670c6250
+          imagePullPolicy: Always
+          name: chaincode-adapter
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always
+  triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - chaincode-adapter
+        from:
+          kind: ImageStreamTag
+          name: 'hyperledger.fabric.openshift.bridge:latest'
+          namespace: myproject
+      type: ImageChange
+    - type: ConfigChange
+
